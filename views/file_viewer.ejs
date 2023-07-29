@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- local css for body -->
+    <link rel="stylesheet" type="text/css" href="../css/file_viewer.css" />
+    <!-- local css for header -->
+    <link rel="stylesheet" type="text/css" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <style>
+      body {
+        margin: 0;
+        padding-bottom: 60px; /* Make space for the footer */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- header -->
+    <div class="nav-bar" style="position: fixed">
+      <a href="/" class="back-icon">
+        <i class="fa-solid fa-circle-arrow-left" style="color: #b8b8b8"></i>
+      </a>
+      <div class="title">CSV Upload</div>
+      <div class="sub-title">Viewer</div>
+      <div class="file-name"><%= fileName %></div>
+    </div>
+
+    <!-- search bar -->
+    <div class="search-bar">
+      <form id="searchForm">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Search data..." />
+          <button id="go" class="search-btn" type="button">Go</button>
+        </div>
+      </form>
+      <div>
+        <p id="total-rows">Total Rows: <%=length%></p>
+      </div>
+    </div>
+
+    <!-- search results -->
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <% for(let h of head) { %>
+            <th><%= h %></th>
+            <% } %>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let row of data) { %>
+          <tr>
+            <% for(let key of Object.keys(row)) { %>
+            <td><%= row[key] %></td>
+            <% } %>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <!-- Your file_viewer.ejs content -->
+
+   
+  <script>
+    // Check if the current page is file_viewer.ejs
+    if (window.location.pathname.includes("file_viewer.ejs")) {
+      // If it is, change the footer's position and background color
+      var footer = document.getElementById("footer");
+      footer.style.position = "static";
+    }
+  </script>
+  </body>
+</html>
